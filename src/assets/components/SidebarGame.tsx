@@ -3,9 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import 'animate.css';
 import { ROUTES, API_URLS, SOCKET_URLS } from '../../routes';
-const SidebarGame = ({ rooms = [], botRooms = [], onRoomClick, sendToUnity, user = {} }) => {
+const SidebarGame = ({ rooms = [], botRooms = [], onRoomClick, sendToUnity, user = {} as any }: any) => {
   const token = localStorage.getItem("authToken") || "";
-  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [selectedRoom, setSelectedRoom] = useState<any>(null);
   const [lastRoomOpen, setLastRoomOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -184,7 +184,7 @@ const SidebarGame = ({ rooms = [], botRooms = [], onRoomClick, sendToUnity, user
         )}
       </div>
       {showConfirmModal && (
-        <div className="modal fade show d-block animate__animated animate__fadeIn" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+        <div className="modal fade show d-block animate__animated animate__fadeIn" tabIndex={-1} style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
           <div className="modal-dialog">
             <div className="modal-content animate__animated animate__slideInDown">
               <div className="modal-header bg-dark border-0">

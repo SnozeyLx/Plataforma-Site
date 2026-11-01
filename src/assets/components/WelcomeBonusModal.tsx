@@ -1,40 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Logo from "../img/logo.jpg";
-import Girar from "../img/Girar.png";
-import Circulo from "../img/Circulo fora.png";
-import Ponteiro from "../img/ponteiro.png";
-import Fixo from "../img/fixo.png";
-import Presente from "../img/presente.png";
-import spinLoop from "../sounds/judgement-button.wav";
-import tick from "../sounds/tick.wav";
-import winSmall from "../sounds/win-small.wav";
-import winBig from "../sounds/win-big.wav";
-import avatar1 from "../img/avatar/avatar1.png";
-import avatar2 from "../img/avatar/avatar2.png";
-import avatar3 from "../img/avatar/avatar3.png";
-import avatar4 from "../img/avatar/avatar4.png";
-import avatar5 from "../img/avatar/avatar5.png";
-import avatar6 from "../img/avatar/avatar6.png";
-import avatar7 from "../img/avatar/avatar7.png";
-import avatar8 from "../img/avatar/avatar8.png";
-import avatar9 from "../img/avatar/avatar9.png";
-import avatar10 from "../img/avatar/avatar10.png";
-import avatar11 from "../img/avatar/avatar11.png";
-import avatar12 from "../img/avatar/avatar12.png";
-import avatar13 from "../img/avatar/avatar13.png";
-import avatar14 from "../img/avatar/avatar14.png";
-import avatar15 from "../img/avatar/avatar15.png";
-import avatar16 from "../img/avatar/avatar16.png";
-import avatar17 from "../img/avatar/avatar17.png";
-import avatar18 from "../img/avatar/avatar18.png";
-import avatar19 from "../img/avatar/avatar19.png";
-import avatar20 from "../img/avatar/avatar20.png";
-import avatar21 from "../img/avatar/avatar21.png";
-import avatar22 from "../img/avatar/avatar22.png";
-import avatar23 from "../img/avatar/avatar23.png";
-import avatar24 from "../img/avatar/avatar24.png";
+const Logo = "/assets/img/logo.jpg";
+const Girar = "/assets/img/Girar.png";
+const Circulo = "/assets/img/Circulo fora.png";
+const Ponteiro = "/assets/img/ponteiro.png";
+const Fixo = "/assets/img/fixo.png";
+const Presente = "/assets/img/presente.png";
+const spinLoop = "/assets/sounds/judgement-button.wav";
+const tick = "/assets/sounds/tick.wav";
+const winSmall = "/assets/sounds/win-small.wav";
+const winBig = "/assets/sounds/win-big.wav";
+const avatar1 = "/assets/img/avatar/avatar1.png";
+const avatar2 = "/assets/img/avatar/avatar2.png";
+const avatar3 = "/assets/img/avatar/avatar3.png";
+const avatar4 = "/assets/img/avatar/avatar4.png";
+const avatar5 = "/assets/img/avatar/avatar5.png";
+const avatar6 = "/assets/img/avatar/avatar6.png";
+const avatar7 = "/assets/img/avatar/avatar7.png";
+const avatar8 = "/assets/img/avatar/avatar8.png";
+const avatar9 = "/assets/img/avatar/avatar9.png";
+const avatar10 = "/assets/img/avatar/avatar10.png";
+const avatar11 = "/assets/img/avatar/avatar11.png";
+const avatar12 = "/assets/img/avatar/avatar12.png";
+const avatar13 = "/assets/img/avatar/avatar13.png";
+const avatar14 = "/assets/img/avatar/avatar14.png";
+const avatar15 = "/assets/img/avatar/avatar15.png";
+const avatar16 = "/assets/img/avatar/avatar16.png";
+const avatar17 = "/assets/img/avatar/avatar17.png";
+const avatar18 = "/assets/img/avatar/avatar18.png";
+const avatar19 = "/assets/img/avatar/avatar19.png";
+const avatar20 = "/assets/img/avatar/avatar20.png";
+const avatar21 = "/assets/img/avatar/avatar21.png";
+const avatar22 = "/assets/img/avatar/avatar22.png";
+const avatar23 = "/assets/img/avatar/avatar23.png";
+const avatar24 = "/assets/img/avatar/avatar24.png";
 import { API_URLS } from "../../routes";
 const avatarMap = {
   avatar1, avatar2, avatar3, avatar4, avatar5, avatar6,
@@ -42,12 +42,12 @@ const avatarMap = {
   avatar13, avatar14, avatar15, avatar16, avatar17, avatar18,
   avatar19, avatar20, avatar21, avatar22, avatar23, avatar24,
 };
-const SpinResultModal = ({ show, value, onCollect }) => {
+const SpinResultModal = ({ show, value, onCollect }: any) => {
   return (
     <>
       <div
         className={`modal fade ${show ? "show d-block" : ""}`}
-        tabIndex="-1"
+        tabIndex={-1}
         style={{ display: show ? "block" : "none" }}
       >
         <div className="modal-dialog modal-dialog-centered">
@@ -82,17 +82,17 @@ const SpinResultModal = ({ show, value, onCollect }) => {
     </>
   );
 };
-const WelcomeBonusModal = ({ show, onClose }) => {
+const WelcomeBonusModal = ({ show, onClose }: any) => {
   const wheelRef = useRef(null);
   const [spinning, setSpinning] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [prizeValue, setPrizeValue] = useState("");
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState<any[]>([]);
   const spinAudioRef = useRef(null);
   const tickAudioRef = useRef(null);
   const winAudioRef = useRef(null);
-  const [segments, setSegments] = useState([]);
-  const [spinConfig, setSpinConfig] = useState([]);
+  const [segments, setSegments] = useState<any[]>([]);
+  const [spinConfig, setSpinConfig] = useState<any[]>([]);
   const [configLoaded, setConfigLoaded] = useState(false);
   const token = localStorage.getItem("authToken");
   useEffect(() => {
@@ -245,7 +245,7 @@ const WelcomeBonusModal = ({ show, onClose }) => {
       </style>
       <div
         className={`modal fade ${show && !showResult ? "show d-block" : ""}`}
-        tabIndex="-1"
+        tabIndex={-1}
         style={{ display: show && !showResult ? "block" : "none" }}
       >
         <div className="modal-dialog modal-dialog-centered">

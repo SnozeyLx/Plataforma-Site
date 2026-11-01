@@ -131,7 +131,7 @@ body {
 }
 
 .pix-select option[value="pix"] {
-  background-image: url('./assets/img/pix.png');
+  background-image: url('/assets/img/pix.png');
   background-repeat: no-repeat;
   background-position: left center;
   padding-left: 20px;

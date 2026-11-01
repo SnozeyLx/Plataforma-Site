@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const SetPayments = ({ balance, onWithdraw, onClose }) => {
+const SetPayments = ({ balance, onWithdraw, onClose }: any) => {
   const [method, setMethod] = useState("pix");
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");

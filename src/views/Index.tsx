@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation";
 import { ROUTES } from '../routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'animate.css';
-import Banner from '../assets/img/banner2.png';
-import BannerSmall from '../assets/img/bannerSmall.png';
-import Icon from '../assets/img/whatsapp.png';
-import Online from '../assets/img/online.png';
-import Live from '../assets/img/aovivo.png';
+const Banner = "/assets/img/banner2.png";
+const BannerSmall = "/assets/img/bannerSmall.png";
+const Icon = "/assets/img/whatsapp.png";
+const Online = "/assets/img/online.png";
+const Live = "/assets/img/aovivo.png";
 import Navbar from '../assets/components/Navbar';
 import LoadPoupap from '../assets/components/LoadPopup';
 import CookieConsent from '../assets/components/CookieConsent';
 import Register from '../assets/components/Register';
 import Login from '../assets/components/Login';
 import ModalSuport from '../assets/components/ModalSuport';
-import Welcome from "../assets/img/Bem Vindo.png";
+const Welcome = "/assets/img/Bem Vindo.png";
 
-const Suport = ({ isOpen, onClose, children }) => {
+const Suport = ({ isOpen, onClose, children }: any) => {
   if (!isOpen) return null;
 
   const handleOverlayClick = (e) => {
@@ -47,7 +47,7 @@ const handleOpenWhatsapp = () => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, children }: any) => {
   if (!isOpen) return null;
   return (
     <div style={{ borderRadius: '20px', backgroundColor: "#080A10B2" }} className="modal-overlay modal show d-block">
@@ -66,7 +66,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     </div>
   );
 };
-const ModalRegister = ({ isOpen, onClose, children }) => {
+const ModalRegister = ({ isOpen, onClose, children }: any) => {
   if (!isOpen) return null;
   return (
     <div style={{ borderRadius: '20px', backgroundColor: "#080A10B2" }} className="modal-overlay modal show d-block">
@@ -81,7 +81,7 @@ const ModalRegister = ({ isOpen, onClose, children }) => {
     </div>
   );
 };
-const Poupap = ({ isOpen, onClose, children }) => {
+const Poupap = ({ isOpen, onClose, children }: any) => {
   const [visible, setVisible] = useState(isOpen);
   useEffect(() => {
     const ageConfirmed = localStorage.getItem("ageConfirmed");
@@ -110,7 +110,7 @@ const Indexpage = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isSuportOpen, setIsSuportOpen] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
   const token = localStorage.getItem('authToken') || '';
 
 
@@ -120,9 +120,9 @@ const Indexpage = () => {
 
   useEffect(() => {
     if (token) {
-      navigate(ROUTES.HOME);
+      router.push(ROUTES.HOME);
     }
-  }, [token, navigate]);
+  }, [token, router]);
   return (
     <div className="container-fluid p-0">
       <Navbar

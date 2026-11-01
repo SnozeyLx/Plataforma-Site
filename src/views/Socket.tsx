@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 const useWebSocket = (url) => {
-    const [socket, setSocket] = useState(null);
-    const [messages, setMessages] = useState([]);
+    const [socket, setSocket] = useState<any>(null);
+    const [messages, setMessages] = useState<any[]>([]);
     useEffect(() => {
         const ws = new WebSocket(url);
         ws.onopen = () =>

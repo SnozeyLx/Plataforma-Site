@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Login from "../pages/Login";
+import Login from "./Login";
 import ModalForgout from "./ModalForgout";
 
 const AuthModalController = () => {

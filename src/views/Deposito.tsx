@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES, API_URLS } from '../routes';
 import NavInfo from "../assets/components/NavInfo";
-import Vectorpay from "../assets/img/Vectorpay.png";
-import Looping from "../assets/img/looping.png";
-import crop from "../assets/img/crop.png";
-import Copia from "../assets/img/copia.png";
-import CopiarQr from "../assets/img/copiarQr.png";
+const Vectorpay = "/assets/img/Vectorpay.png";
+const Looping = "/assets/img/looping.png";
+const crop = "/assets/img/crop.png";
+const Copia = "/assets/img/copia.png";
+const CopiarQr = "/assets/img/copiarQr.png";
 const DEPOSIT_KEY = "activeDeposit";
 const MAX_SECONDS = 82800;
 const Deposito = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [showCopyToast, setShowCopyToast] = useState(false);
   const [value, setValue] = useState(0);
   const [qrCode, setQrCode] = useState("");
@@ -91,20 +91,21 @@ const Deposito = () => {
     } catch (error) {
       console.error("Erro ao criar depósito:", error);
       alert("Erro ao criar depósito.");
-      navigate(ROUTES.WALLET);
+      router.push(ROUTES.WALLET);
     } finally {
       setLoading(false);
     }
   };
   useEffect(() => {
-    const val = location.state?.value;
+    const raw = searchParams.get("value");
+    const val = raw == null ? null : Number(raw);
     if (val == null || isNaN(val)) {
       alert("Valor inválido");
-      navigate(ROUTES.WALLET);
+      router.push(ROUTES.WALLET);
       return;
     }
     fetchDepositData(val);
-  }, [location.state, navigate]);
+  }, [searchParams, router]);
 
   useEffect(() => {
     if (!orderId || status === "paid") return;
@@ -121,7 +122,7 @@ const Deposito = () => {
             clearLocalStorage();
 
             setTimeout(() => {
-              navigate(ROUTES.GAME);
+              router.push(ROUTES.GAME);
             }, 60000);
           } else if (paymentStatus === "expired") {
             setStatus("expired");
@@ -144,7 +145,7 @@ const Deposito = () => {
       }
     }, 2000);
     return () => clearInterval(statusInterval);
-  }, [orderId, status, navigate]);
+  }, [orderId, status, router]);
   useEffect(() => {
     if (!orderId || status === "paid") return;
     if (seconds <= 0) {
@@ -231,7 +232,7 @@ const Deposito = () => {
             <p
               className="text-white fs-5 m-0 d-flex align-items-center poppins-semibold"
               style={{ cursor: "pointer", fontSize: "20px" }}
-              onClick={() => navigate(ROUTES.WALLET)}
+              onClick={() => router.push(ROUTES.WALLET)}
             >
               {"<"} Depósito
             </p>
@@ -336,7 +337,7 @@ const Deposito = () => {
               {status === "paid" && (
                 <button
                   style={{ backgroundColor: "#F70004", height: "48px" }}
-                  className="btn btn-danger w-100" onClick={() => navigate(ROUTES.GAME)}>
+                  className="btn btn-danger w-100" onClick={() => router.push(ROUTES.GAME)}>
                   Jogar agora
                 </button>
               )}

@@ -1,45 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation";
 import { ROUTES, API_URLS } from '../../routes';
 import 'animate.css';
 
-import logo from '../img/logo.jpg';
-import Burguer from '../img/burguer.png';
-import logoMobile from '../img/logoMobile.jpg';
-import VectorMessage from '../img/VectorMessage.png';
-import Avatar from '../img/avatar.png';
-import WelcomeUser from '../img/welcomeuser.png';
+const logo = "/assets/img/logo.jpg";
+const Burguer = "/assets/img/burguer.png";
+const logoMobile = "/assets/img/logoMobile.jpg";
+const VectorMessage = "/assets/img/VectorMessage.png";
+const Avatar = "/assets/img/avatar.png";
+const WelcomeUser = "/assets/img/welcomeuser.png";
 import { Wallet } from 'react-bootstrap-icons';
-import Avatar1 from '../img/avatar/avatar1.png';
-import Avatar2 from '../img/avatar/avatar2.png';
-import Avatar3 from '../img/avatar/avatar3.png';
-import Avatar4 from '../img/avatar/avatar4.png';
-import Avatar5 from '../img/avatar/avatar5.png';
-import Avatar6 from '../img/avatar/avatar6.png';
-import Avatar7 from '../img/avatar/avatar7.png';
-import Avatar8 from '../img/avatar/avatar8.png';
-import Avatar9 from '../img/avatar/avatar9.png';
-import Avatar10 from '../img/avatar/avatar10.png';
-import Avatar11 from '../img/avatar/avatar11.png';
-import Avatar12 from '../img/avatar/avatar12.png';
-import Avatar13 from '../img/avatar/avatar13.png';
-import Avatar14 from '../img/avatar/avatar14.png';
-import Avatar15 from '../img/avatar/avatar15.png';
-import Avatar16 from '../img/avatar/avatar16.png';
-import Avatar17 from '../img/avatar/avatar17.png';
-import Avatar18 from '../img/avatar/avatar18.png';
-import Avatar19 from '../img/avatar/avatar19.png';
-import Avatar20 from '../img/avatar/avatar20.png';
-import Avatar21 from '../img/avatar/avatar21.png';
-import Avatar22 from '../img/avatar/avatar22.png';
-import Avatar23 from '../img/avatar/avatar23.png';
-import Avatar24 from '../img/avatar/avatar24.png';
-const NavInfo = () => {
-  const [user, setUser] = useState({});
+const Avatar1 = "/assets/img/avatar/avatar1.png";
+const Avatar2 = "/assets/img/avatar/avatar2.png";
+const Avatar3 = "/assets/img/avatar/avatar3.png";
+const Avatar4 = "/assets/img/avatar/avatar4.png";
+const Avatar5 = "/assets/img/avatar/avatar5.png";
+const Avatar6 = "/assets/img/avatar/avatar6.png";
+const Avatar7 = "/assets/img/avatar/avatar7.png";
+const Avatar8 = "/assets/img/avatar/avatar8.png";
+const Avatar9 = "/assets/img/avatar/avatar9.png";
+const Avatar10 = "/assets/img/avatar/avatar10.png";
+const Avatar11 = "/assets/img/avatar/avatar11.png";
+const Avatar12 = "/assets/img/avatar/avatar12.png";
+const Avatar13 = "/assets/img/avatar/avatar13.png";
+const Avatar14 = "/assets/img/avatar/avatar14.png";
+const Avatar15 = "/assets/img/avatar/avatar15.png";
+const Avatar16 = "/assets/img/avatar/avatar16.png";
+const Avatar17 = "/assets/img/avatar/avatar17.png";
+const Avatar18 = "/assets/img/avatar/avatar18.png";
+const Avatar19 = "/assets/img/avatar/avatar19.png";
+const Avatar20 = "/assets/img/avatar/avatar20.png";
+const Avatar21 = "/assets/img/avatar/avatar21.png";
+const Avatar22 = "/assets/img/avatar/avatar22.png";
+const Avatar23 = "/assets/img/avatar/avatar23.png";
+const Avatar24 = "/assets/img/avatar/avatar24.png";
+const NavInfo = (_props: any) => {
+  const [user, setUser] = useState<any>({});
   const [token, setToken] = useState(localStorage.getItem('authToken') || '');
   const [showMenu, setShowMenu] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
   const [showExitModal, setShowExitModal] = useState(false);
   const toggleMenu = () => setShowMenu(prev => !prev);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -116,7 +116,7 @@ const NavInfo = () => {
       if ([401, 403].includes(err.response.status)) {
         localStorage.removeItem('authToken');
         localStorage.removeItem('refreshToken');
-        navigate('/');
+        router.push('/');
       }
       return null;
     }
@@ -160,13 +160,13 @@ const NavInfo = () => {
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('refreshToken');
-    localStorage.removeItem('welcomeShown', '1');
-    navigate('/');
+    localStorage.removeItem('welcomeShown');
+    router.push('/');
   };
-  const handleVip = () => navigate(ROUTES.VIP);
-  const handleProfile = () => navigate(ROUTES.PROFILE);
-  const handleWallet = () => navigate(ROUTES.WALLET);
-  const handleSupprt = () => navigate(ROUTES.SUPPORT);
+  const handleVip = () => router.push(ROUTES.VIP);
+  const handleProfile = () => router.push(ROUTES.PROFILE);
+  const handleWallet = () => router.push(ROUTES.WALLET);
+  const handleSupprt = () => router.push(ROUTES.SUPPORT);
   return (
     <>
       <style>

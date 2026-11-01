@@ -1,37 +1,37 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ROUTES, API_URLS } from "../routes";
-import Vetor from "../assets/img/Vector.png";
+const Vetor = "/assets/img/Vector.png";
 import NavInfo from "../assets/components/NavInfo";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import "animate.css";
-import Aba from "../assets/img/caneta_avatar.png";
-import Avatar from "../assets/img/avatar.png";
-import Avatar1 from "../assets/img/avatar/avatar1.png";
-import Avatar2 from "../assets/img/avatar/avatar2.png";
-import Avatar3 from "../assets/img/avatar/avatar3.png";
-import Avatar4 from "../assets/img/avatar/avatar4.png";
-import Avatar5 from "../assets/img/avatar/avatar5.png";
-import Avatar6 from "../assets/img/avatar/avatar6.png";
-import Avatar7 from "../assets/img/avatar/avatar7.png";
-import Avatar8 from "../assets/img/avatar/avatar8.png";
-import Avatar9 from "../assets/img/avatar/avatar9.png";
-import Avatar10 from "../assets/img/avatar/avatar10.png";
-import Avatar11 from "../assets/img/avatar/avatar11.png";
-import Avatar12 from "../assets/img/avatar/avatar12.png";
-import Avatar13 from "../assets/img/avatar/avatar13.png";
-import Avatar14 from "../assets/img/avatar/avatar14.png";
-import Avatar15 from "../assets/img/avatar/avatar15.png";
-import Avatar16 from "../assets/img/avatar/avatar16.png";
-import Avatar17 from "../assets/img/avatar/avatar17.png";
-import Avatar18 from "../assets/img/avatar/avatar18.png";
-import Avatar19 from "../assets/img/avatar/avatar19.png";
-import Avatar20 from "../assets/img/avatar/avatar20.png";
-import Avatar21 from "../assets/img/avatar/avatar21.png";
-import Avatar22 from "../assets/img/avatar/avatar22.png";
-import Avatar23 from "../assets/img/avatar/avatar23.png";
-import Avatar24 from "../assets/img/avatar/avatar24.png";
+const Aba = "/assets/img/caneta_avatar.png";
+const Avatar = "/assets/img/avatar.png";
+const Avatar1 = "/assets/img/avatar/avatar1.png";
+const Avatar2 = "/assets/img/avatar/avatar2.png";
+const Avatar3 = "/assets/img/avatar/avatar3.png";
+const Avatar4 = "/assets/img/avatar/avatar4.png";
+const Avatar5 = "/assets/img/avatar/avatar5.png";
+const Avatar6 = "/assets/img/avatar/avatar6.png";
+const Avatar7 = "/assets/img/avatar/avatar7.png";
+const Avatar8 = "/assets/img/avatar/avatar8.png";
+const Avatar9 = "/assets/img/avatar/avatar9.png";
+const Avatar10 = "/assets/img/avatar/avatar10.png";
+const Avatar11 = "/assets/img/avatar/avatar11.png";
+const Avatar12 = "/assets/img/avatar/avatar12.png";
+const Avatar13 = "/assets/img/avatar/avatar13.png";
+const Avatar14 = "/assets/img/avatar/avatar14.png";
+const Avatar15 = "/assets/img/avatar/avatar15.png";
+const Avatar16 = "/assets/img/avatar/avatar16.png";
+const Avatar17 = "/assets/img/avatar/avatar17.png";
+const Avatar18 = "/assets/img/avatar/avatar18.png";
+const Avatar19 = "/assets/img/avatar/avatar19.png";
+const Avatar20 = "/assets/img/avatar/avatar20.png";
+const Avatar21 = "/assets/img/avatar/avatar21.png";
+const Avatar22 = "/assets/img/avatar/avatar22.png";
+const Avatar23 = "/assets/img/avatar/avatar23.png";
+const Avatar24 = "/assets/img/avatar/avatar24.png";
 const vipDataFallback = {
   level: 0,
   xpCurrent: 0,
@@ -61,7 +61,7 @@ const calcVipLevelProgress = (totalPoints) => {
     xpTotal: threshold,
   };
 };
-const FakeIcon = ({ label = "•" }) => (
+const FakeIcon = ({ label = "•" }: any) => (
   <div
     style={{
       width: 34,
@@ -78,7 +78,7 @@ const FakeIcon = ({ label = "•" }) => (
     {label}
   </div>
 );
-const StatCard = ({ iconLabel, title, value }) => (
+const StatCard = ({ iconLabel, title, value }: any) => (
   <div
     className="p-2"
     style={{
@@ -98,7 +98,7 @@ const StatCard = ({ iconLabel, title, value }) => (
     <div style={{ fontSize: 14, fontWeight: 700 }}>{value}</div>
   </div>
 );
-const AchievementCard = ({ a }) => {
+const AchievementCard = ({ a }: any) => {
   const locked = !a.unlocked;
   return (
     <div
@@ -189,10 +189,10 @@ const AchievementCard = ({ a }) => {
   );
 };
 const Vip = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
-  const [profile, setProfile] = useState(null);
-  const [vipDashboard, setVipDashboard] = useState(null);
+  const [profile, setProfile] = useState<any>(null);
+  const [vipDashboard, setVipDashboard] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [imgProfile, setImgProflie] = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState(0);
@@ -210,7 +210,7 @@ const Vip = () => {
     if (Number.isInteger(selectedAvatar) && selectedAvatar >= 1 && selectedAvatar <= avatares.length) {
       return avatares[selectedAvatar - 1];
     }
-    if (imgProfile && String(imgProfile).trim() !== "" && !isNaN(imgProfile)) {
+    if (imgProfile && String(imgProfile).trim() !== "" && !isNaN(Number(imgProfile))) {
       const n = Number(imgProfile);
       if (Number.isFinite(n) && n >= 1 && n <= avatares.length) {
         return avatares[n - 1];
@@ -320,7 +320,7 @@ const Vip = () => {
                   <p
                     className="text-white fs-5 m-0 d-flex align-items-center"
                     style={{ cursor: "pointer" }}
-                    onClick={() => navigate(ROUTES.HOME)}
+                    onClick={() => router.push(ROUTES.HOME)}
                   >
                     <img src={Vetor} alt="Voltar" className="poppins-semibold me-2" />
                     Clube VIP

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import axios from "axios";
 import { API_URLS } from "../../routes";
-import spinner from "../img/hugeicons_loading-03.png";
-import RecoveryPass from "../img/recoverypass.png";
+const spinner = "/assets/img/hugeicons_loading-03.png";
+const RecoveryPass = "/assets/img/recoverypass.png";
 import "animate.css";
 function openSuccessModal() {
   const host = document.createElement("div");
@@ -93,7 +93,7 @@ function openSuccessModal() {
   root.render(<SuccessModal />);
 }
 
-const ModalForgot = ({ onClose }) => {
+const ModalForgot = ({ onClose }: any) => {
   const [email, setEmail] = React.useState("");
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);

@@ -1,20 +1,20 @@
 export const ROUTES = {
-  LOGIN: process.env.REACT_APP_LOGIN_ROUTE || '/',
+  LOGIN: process.env.NEXT_PUBLIC_LOGIN_ROUTE || '/',
   INDEX: '/index',
-  HOME: process.env.REACT_APP_HOME_ROUTE || '/home',
-  GAME: process.env.REACT_APP_GAME_ROUTE || '/game',
-  PROFILE: process.env.REACT_APP_PROFILE_ROUTE || '/profile',
-  WALLET: process.env.REACT_APP_WALLET_ROUTE || '/wallet',
-  DEPOSIT: process.env.REACT_APP_DEPOSIT_ROUTE || '/deposito',
-  SUPPORT: process.env.REACT_APP_SUPPORT_ROUTE || '/suporte',
-  RANKING: process.env.REACT_APP_RANKING_ROUTE || '/ranking',
-  BANK: process.env.REACT_APP_BANK_ROUTE || '/bank',
+  HOME: process.env.NEXT_PUBLIC_HOME_ROUTE || '/home',
+  GAME: process.env.NEXT_PUBLIC_GAME_ROUTE || '/game',
+  PROFILE: process.env.NEXT_PUBLIC_PROFILE_ROUTE || '/profile',
+  WALLET: process.env.NEXT_PUBLIC_WALLET_ROUTE || '/wallet',
+  DEPOSIT: process.env.NEXT_PUBLIC_DEPOSIT_ROUTE || '/deposito',
+  SUPPORT: process.env.NEXT_PUBLIC_SUPPORT_ROUTE || '/suporte',
+  RANKING: process.env.NEXT_PUBLIC_RANKING_ROUTE || '/ranking',
+  BANK: process.env.NEXT_PUBLIC_BANK_ROUTE || '/bank',
   LIVE: '/live',
   RESET: '/reset',
   VIP: '/vip'
 };
 export const API_URLS = {
-  BASE: process.env.REACT_APP_API_BASE_URL || 'https://api.rondaonlinebr.com',
+  BASE: process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.rondaonlinebr.com',
   ROOMS: '/rooms',
   AUTH: '/auth',
   USER: '/user',
@@ -24,17 +24,17 @@ export const API_URLS = {
   VIP: '/vip'
 };
 export const SOCKET_URLS = {
-  BASE: process.env.REACT_APP_SOCKET_BASE_URL || 'wss://api.rondaonlinebr.com:8081',
-  CHAT: process.env.REACT_APP_CHAT_SOCKET_URL || 'wss://api.rondaonlinebr.com:8081/chat',
-  USER_LIVE: process.env.REACT_APP_USER_LIVE_SOCKET_URL || 'wss://api.rondaonlinebr.com:8081/userlive',
-  ARTEVIT: process.env.REACT_APP_SOCKET_ARTEVIT_URL || 'wss://ronda-api.artevitdevs.com.br:8080'
+  BASE: process.env.NEXT_PUBLIC_SOCKET_BASE_URL || 'wss://api.rondaonlinebr.com:8081',
+  CHAT: process.env.NEXT_PUBLIC_CHAT_SOCKET_URL || 'wss://api.rondaonlinebr.com:8081/chat',
+  USER_LIVE: process.env.NEXT_PUBLIC_USER_LIVE_SOCKET_URL || 'wss://api.rondaonlinebr.com:8081/userlive',
+  ARTEVIT: process.env.NEXT_PUBLIC_SOCKET_ARTEVIT_URL || 'wss://ronda-api.artevitdevs.com.br:8080'
 };
 export const UNITY_URLS = {
-  BASE: process.env.REACT_APP_UNITY_URL || 'https://unity.rondaonlinebr.com',
-  DEALER_PATH: process.env.REACT_APP_UNITY_DEALER_PATH || '/unity_dealer',
-  USER_PATH: process.env.REACT_APP_UNITY_USER_PATH || '/unity_user'
+  BASE: process.env.NEXT_PUBLIC_UNITY_URL || 'https://unity.rondaonlinebr.com',
+  DEALER_PATH: process.env.NEXT_PUBLIC_UNITY_DEALER_PATH || '/unity_dealer',
+  USER_PATH: process.env.NEXT_PUBLIC_UNITY_USER_PATH || '/unity_user'
 };
-export const STREAM_URL = process.env.REACT_APP_STREAM_URL || 'https://stream-akamai.castr.com/5b9352dbda7b8c769937e459/live_2361c920455111ea85db6911fe397b9e/index.fmp4.m3u8';
+export const STREAM_URL = process.env.NEXT_PUBLIC_STREAM_URL || 'https://stream-akamai.castr.com/5b9352dbda7b8c769937e459/live_2361c920455111ea85db6911fe397b9e/index.fmp4.m3u8';
 export const buildApiUrl = (endpoint) => {
   return `${API_URLS.BASE}${endpoint}`;
 };

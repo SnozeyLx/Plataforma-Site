@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../img/logo.jpg";
-import card from "../img/imagem-cadastro 1.png";
-import circle from "../img/circle.png";
-import spinner from "../img/hugeicons_loading-03.png";
-import { useNavigate } from "react-router-dom";
+const Logo = "/assets/img/logo.jpg";
+const card = "/assets/img/imagem-cadastro 1.png";
+const circle = "/assets/img/circle.png";
+const spinner = "/assets/img/hugeicons_loading-03.png";
+import { useRouter } from "next/navigation";
 import { ROUTES, API_URLS } from "../../routes";
 import axios from "axios";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import "animate.css";
-const Register = ({ onClose, hideCloseButton = false }) => {
+const Register = ({ onClose, hideCloseButton = false }: any) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -16,16 +16,16 @@ const Register = ({ onClose, hideCloseButton = false }) => {
   const [cpf, setCpf] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
-  const [focusedField, setFocusedField] = useState(null);
+  const [focusedField, setFocusedField] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [fieldErrors, setFieldErrors] = useState({});
+  const [fieldErrors, setFieldErrors] = useState<any>({});
   const [tracker, setTracker] = useState("");
   const params = new URLSearchParams(window.location.search);
   const btag = params.get("btag");
   useEffect(() => {
     setTracker(btag || "");
   }, [btag]);
-  const navigate = useNavigate();
+  const router = useRouter();
   const checkPasswordRequirements = (password) => ({
     length: password.length >= 8 && password.length <= 30,
     upperLower: /[A-Z]/.test(password) && /[a-z]/.test(password),
@@ -137,7 +137,7 @@ const Register = ({ onClose, hideCloseButton = false }) => {
       });
       localStorage.setItem("authToken", response.data.token);
       onClose?.();
-      navigate(ROUTES.HOME);
+      router.push(ROUTES.HOME);
     } catch (err) {
       if (!err?.response) {
         setFieldErrors({});

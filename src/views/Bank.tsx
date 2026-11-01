@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'animate.css';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation";
 import NavInfo from '../assets/components/NavInfo';
-import Avatar from '../assets/img/avatar.jpg';
+const Avatar = "/assets/img/avatar.jpg";
 import GetPayments from "../assets/components/GetPayments";
 import SetPayments from "../assets/components/SetPayments";
-import WomanLeft from "../assets/img/dama_esq.png";
-import WomanRight from "../assets/img/dama_dir.png";
-import Pix from "../assets/img/pix.png";
+const WomanLeft = "/assets/img/dama_esq.png";
+const WomanRight = "/assets/img/dama_dir.png";
+const Pix = "/assets/img/pix.png";
 
-const Bank = ({ balance, onWithdraw, onClose }) => {
+const Bank = ({ balance, onWithdraw, onClose }: any = {}) => {
     const token = localStorage.getItem('authToken') || '';
-    const navigate = useNavigate();
-    const [user, setUser] = useState({});
+    const router = useRouter();
+    const [user, setUser] = useState<any>({});
     const [loading, setLoading] = useState(true);
 
     const [method, setMethod] = useState("pix");
@@ -89,7 +89,7 @@ const Bank = ({ balance, onWithdraw, onClose }) => {
     };
 
     const goToProfile = () => {
-        navigate(`/profile`);
+        router.push(`/profile`);
     };
 
     return (

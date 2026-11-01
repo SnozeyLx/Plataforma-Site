@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import seta from "../img/Icon_seta.png";
-const ModalSuport = ({ onClose }) => {
+import { useRouter } from "next/navigation";
+const seta = "/assets/img/Icon_seta.png";
+const ModalSuport = ({ onClose }: any) => {
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const router = useRouter();
   return (
     <div className="modal-overlay">
       <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "400px" }}>
@@ -18,14 +18,14 @@ const ModalSuport = ({ onClose }) => {
               type="text"
               className="form-control bg-secondary text-light border-0 pe-5"
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(e) => setMessage((e.target as HTMLInputElement).value)}
               required
               placeholder="Digite sua mensagem..."
               style={{ paddingRight: "45px" }}
             />
             <button
               type="button"
-              onClick={(e) => setMessage(e.target.value)}
+              onClick={(e) => setMessage((e.target as HTMLInputElement).value)}
               className="btn p-0 position-absolute"
               style={{ top: "50%", right: "10px", transform: "translateY(-50%)" }}
             >

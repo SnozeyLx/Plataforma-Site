@@ -3,61 +3,63 @@ import axios from "axios";
 //import { io } from "socket.io-client";
 import { getSocket } from "../SocketNew";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES, API_URLS } from '../routes';
 import 'animate.css';
 import '../Homepage.css';
 
 import NavInfo from "../assets/components/NavInfo";
-import side1 from "../assets/img/side1.png";
-import side2 from "../assets/img/side2.png";
-import side3 from "../assets/img/side3.png";
-import side4 from "../assets/img/side4.png";
+const ClipPath = "clippath" as any;
 
-import mobile1 from "../assets/img/sidemobile1.png";
-import mobile2 from "../assets/img/sidemobile2.png";
-import mobile3 from "../assets/img/sidemobile3.png";
-import mobile4 from "../assets/img/sidemobile4.png";
-import Online from "../assets/img/image1.png";
-import Live from "../assets/img/image2.png";
-import OnGame from "../assets/img/onGame.png";
-import OffGame from "../assets/img/offGame.png";
-import IconRoulette from "../assets/img/iconRoulette.png";
-import avatar1 from "../assets/img/avatar/avatar1.png";
-import avatar2 from "../assets/img/avatar/avatar2.png";
-import avatar3 from "../assets/img/avatar/avatar3.png";
-import avatar4 from "../assets/img/avatar/avatar4.png";
-import avatar5 from "../assets/img/avatar/avatar5.png";
-import avatar6 from "../assets/img/avatar/avatar6.png";
-import avatar7 from "../assets/img/avatar/avatar7.png";
-import avatar8 from "../assets/img/avatar/avatar8.png";
-import avatar9 from "../assets/img/avatar/avatar9.png";
-import avatar10 from "../assets/img/avatar/avatar10.png";
-import avatar11 from "../assets/img/avatar/avatar11.png";
-import avatar12 from "../assets/img/avatar/avatar12.png";
-import avatar13 from "../assets/img/avatar/avatar13.png";
-import avatar14 from "../assets/img/avatar/avatar14.png";
-import avatar15 from "../assets/img/avatar/avatar15.png";
-import avatar16 from "../assets/img/avatar/avatar16.png";
-import avatar17 from "../assets/img/avatar/avatar17.png";
-import avatar18 from "../assets/img/avatar/avatar18.png";
-import avatar19 from "../assets/img/avatar/avatar19.png";
-import avatar20 from "../assets/img/avatar/avatar20.png";
-import avatar21 from "../assets/img/avatar/avatar21.png";
-import avatar22 from "../assets/img/avatar/avatar22.png";
-import avatar23 from "../assets/img/avatar/avatar23.png";
-import avatar24 from "../assets/img/avatar/avatar24.png";
+const side1 = "/assets/img/side1.png";
+const side2 = "/assets/img/side2.png";
+const side3 = "/assets/img/side3.png";
+const side4 = "/assets/img/side4.png";
+
+const mobile1 = "/assets/img/sidemobile1.png";
+const mobile2 = "/assets/img/sidemobile2.png";
+const mobile3 = "/assets/img/sidemobile3.png";
+const mobile4 = "/assets/img/sidemobile4.png";
+const Online = "/assets/img/image1.png";
+const Live = "/assets/img/image2.png";
+const OnGame = "/assets/img/onGame.png";
+const OffGame = "/assets/img/offGame.png";
+const IconRoulette = "/assets/img/iconRoulette.png";
+const avatar1 = "/assets/img/avatar/avatar1.png";
+const avatar2 = "/assets/img/avatar/avatar2.png";
+const avatar3 = "/assets/img/avatar/avatar3.png";
+const avatar4 = "/assets/img/avatar/avatar4.png";
+const avatar5 = "/assets/img/avatar/avatar5.png";
+const avatar6 = "/assets/img/avatar/avatar6.png";
+const avatar7 = "/assets/img/avatar/avatar7.png";
+const avatar8 = "/assets/img/avatar/avatar8.png";
+const avatar9 = "/assets/img/avatar/avatar9.png";
+const avatar10 = "/assets/img/avatar/avatar10.png";
+const avatar11 = "/assets/img/avatar/avatar11.png";
+const avatar12 = "/assets/img/avatar/avatar12.png";
+const avatar13 = "/assets/img/avatar/avatar13.png";
+const avatar14 = "/assets/img/avatar/avatar14.png";
+const avatar15 = "/assets/img/avatar/avatar15.png";
+const avatar16 = "/assets/img/avatar/avatar16.png";
+const avatar17 = "/assets/img/avatar/avatar17.png";
+const avatar18 = "/assets/img/avatar/avatar18.png";
+const avatar19 = "/assets/img/avatar/avatar19.png";
+const avatar20 = "/assets/img/avatar/avatar20.png";
+const avatar21 = "/assets/img/avatar/avatar21.png";
+const avatar22 = "/assets/img/avatar/avatar22.png";
+const avatar23 = "/assets/img/avatar/avatar23.png";
+const avatar24 = "/assets/img/avatar/avatar24.png";
 import WelcomeBonusModal from "../assets/components/WelcomeBonusModal";
 const Homepage = () => {
-  const [rooms, setRooms] = useState([]);
-  const [ranking, setRanking] = useState([]);
+  const [rooms, setRooms] = useState<any[]>([]);
+  const [ranking, setRanking] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isUnityReady, setIsUnityReady] = useState(false);
-  const [roomUsers, setRoomUsers] = useState([]);
+  const [roomUsers, setRoomUsers] = useState<any[]>([]);
   const [token, setToken] = useState(localStorage.getItem("authToken") || "");
-  const navigate = useNavigate();
-  const routerLocation = useLocation();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const unityRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -175,11 +177,11 @@ const Homepage = () => {
   }, [token]); */
   
   useEffect(() => {
-  if (routerLocation.state?.alreadyOnRoom) {
+  if (searchParams.get("alreadyOnRoom")) {
     setShowModal3(true);
-    window.history.replaceState({}, document.title); // opcional
+    router.replace(window.location.pathname); // opcional
   }
-  }, [routerLocation.state]);
+  }, [searchParams, router]);
 
 useEffect(() => {
   const socket = getSocket();        // ✅ usa o singleton
@@ -251,14 +253,14 @@ useEffect(() => {
       return;
     } 
     //localStorage.setItem("roomId", "1" );
-    navigate(ROUTES.GAME);
+    router.push(ROUTES.GAME);
   };
   
   useEffect(() => {
     if (!token) {
-      navigate("/");
+      router.push("/");
     }
-  }, [token, navigate]);
+  }, [token, router]);
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
@@ -347,7 +349,7 @@ useEffect(() => {
       room_id: 4,
     });
   };
-  const sendToUnity = (roomId) => {
+  const sendToUnity = (roomId: any) => {
     if (!isUnityReady || !unityRef.current?.SendMessage) {
       console.error("Unity ainda não está pronto ou não foi carregado corretamente!");
       return;
@@ -377,9 +379,9 @@ useEffect(() => {
             <path d="M4.92247 11.4653L1.04733 5.00645C0.880229 4.72778 0.801643 4.40789 0.821326 4.0865C0.841009 3.76511 0.958095 3.45637 1.15805 3.19863L2.52925 1.44011C2.68792 1.23599 2.89365 1.07032 3.13017 0.956221C3.3667 0.842119 3.6275 0.782715 3.89194 0.782715H14.1121C14.3765 0.782715 14.6374 0.842119 14.8739 0.956221C15.1104 1.07032 15.3161 1.23599 15.4748 1.44011L16.8375 3.19863C17.0388 3.45555 17.1574 3.76386 17.1786 4.08526C17.1998 4.40666 17.1226 4.72699 16.9567 5.00645L13.0816 11.4653M8.15034 9.00012L3.14246 0.947073M9.8537 9.00012L14.8616 0.947073M5.5953 4.89141H12.4087M9.00202 13.9305V12.2871H8.57618M13.2604 13.1088C13.2604 15.378 11.3539 17.2175 9.00202 17.2175C6.65017 17.2175 4.74362 15.378 4.74362 13.1088C4.74362 10.8396 6.65017 9.00011 9.00202 9.00011C11.3539 9.00011 13.2604 10.8396 13.2604 13.1088Z" stroke="#99A1AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
           </g>
           <defs>
-            <clippath id="clip0_1460_35111">
+            <ClipPath id="clip0_1460_35111">
               <rect width={18} height={18} fill="white" />
-            </clippath>
+            </ClipPath>
           </defs>
         </svg>
       );
@@ -390,9 +392,9 @@ useEffect(() => {
             <path d="M4.92247 11.4653L1.04733 5.00645C0.880229 4.72778 0.801643 4.40789 0.821326 4.0865C0.841009 3.76511 0.958095 3.45637 1.15805 3.19863L2.52925 1.44011C2.68792 1.23599 2.89365 1.07032 3.13017 0.956221C3.3667 0.842119 3.6275 0.782715 3.89194 0.782715H14.1121C14.3765 0.782715 14.6374 0.842119 14.8739 0.956221C15.1104 1.07032 15.3161 1.23599 15.4748 1.44011L16.8375 3.19863C17.0388 3.45555 17.1574 3.76386 17.1786 4.08526C17.1998 4.40666 17.1226 4.72699 16.9567 5.00645L13.0816 11.4653M8.15034 9.00012L3.14246 0.947073M9.8537 9.00012L14.8616 0.947073M5.5953 4.89141H12.4087M9.00202 13.9305V12.2871H8.57618M13.2604 13.1088C13.2604 15.378 11.3539 17.2175 9.00202 17.2175C6.65017 17.2175 4.74362 15.378 4.74362 13.1088C4.74362 10.8396 6.65017 9.00011 9.00202 9.00011C11.3539 9.00011 13.2604 10.8396 13.2604 13.1088Z" stroke="#BB4D00" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
           </g>
           <defs>
-            <clippath id="clip0_1463_35599">
+            <ClipPath id="clip0_1463_35599">
               <rect width={18} height={18} fill="white" />
-            </clippath>
+            </ClipPath>
           </defs>
         </svg>
       );
@@ -511,7 +513,7 @@ useEffect(() => {
                           //onClick={handleEnterRoom }
                             /* () => {
                             localStorage.setItem("roomId", 1);
-                            navigate(ROUTES.GAME);
+                            router.push(ROUTES.GAME);
                           } */
                           
                           className="btn btn-danger animate__animated animate__bounceIn"
@@ -706,7 +708,7 @@ useEffect(() => {
                 <span
                   className="poppins-semibold text-white"
                   style={{ paddingTop: "7px", fontSize: "18px", letterSpacing: "0.5px" }}
-                  onClick={() => navigate(ROUTES.RANKING)}
+                  onClick={() => router.push(ROUTES.RANKING)}
                 >
                   Ver tudo
                 </span>
@@ -819,7 +821,7 @@ useEffect(() => {
                           border: cardBorder,
                           animationDelay: `${idx * 0.1}s`,
                         }}
-                        onClick={() => navigate(ROUTES.RANKING)}
+                        onClick={() => router.push(ROUTES.RANKING)}
                       >
                         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                           <div style={{ flex: 1, textAlign: "left" }}>
@@ -961,7 +963,7 @@ useEffect(() => {
           )}    
 
         {/*   {showModal3 && (
-            <div className="modal show d-block" tabIndex="-1">
+            <div className="modal show d-block" tabIndex={-1}>
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">

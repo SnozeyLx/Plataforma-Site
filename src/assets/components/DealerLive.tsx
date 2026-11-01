@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation";
 import { ROUTES, SOCKET_URLS } from '../../routes';
-import Vetor from "../img/Vector.png";
-import Relogio from "../img/relogio.png";
-import Player from "../img/player.png";
+const Vetor = "/assets/img/Vector.png";
+const Relogio = "/assets/img/relogio.png";
+const Player = "/assets/img/player.png";
 import UnityDealer from './UnityDealer';
 
-const DealerLive = ({ unityRef, setIsUnityReady }) => {
-  const navigate = useNavigate();
+const DealerLive = ({ unityRef, setIsUnityReady }: any = {}) => {
+  const router = useRouter();
   const videoRef = useRef(null);
   const ws = useRef(null);
   const peerConnectionRef = useRef(null);
   const [connectionStatus, setConnectionStatus] = useState("disconnected");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null);
   const [viewerCount, setViewerCount] = useState(0);
-  const [stream, setStream] = useState(null);
+  const [stream, setStream] = useState<any>(null);
   const [currentTime, setCurrentTime] = useState("");
   const offerRequested = useRef(false);
 
@@ -150,7 +150,7 @@ const DealerLive = ({ unityRef, setIsUnityReady }) => {
           marginTop: "14px",
           fontSize: window.innerWidth <= 768 ? "16px" : "20px",
           cursor: "pointer"
-        }} onClick={() => navigate(ROUTES.HOME)}>
+        }} onClick={() => router.push(ROUTES.HOME)}>
           <img style={{
             marginRight: window.innerWidth <= 768 ? "5px" : "10px",
             width: window.innerWidth <= 768 ? "16px" : "auto"

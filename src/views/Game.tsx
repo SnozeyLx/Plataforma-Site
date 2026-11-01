@@ -4,18 +4,18 @@ import { getSocket } from "../SocketNew";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 import NavInfo from "../assets/components/NavInfo";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES, API_URLS } from "../routes";
 import UserLive from "../assets/components/UserLive";
 import ChatOnline from "../assets/components/ChatOnline";
 
 const Game = () => {
-  const [user, setUser] = useState([]);
-  const [rooms, setRooms] = useState([]);
+  const [user, setUser] = useState<any>([]);
+  const [rooms, setRooms] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedRoom, setSelectedRoom] = useState(null);
-  const [apostas, setApostas] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState<any>(null);
+  const [apostas, setApostas] = useState<any[]>([]);
   const [percentages, setPercentages] = useState({
     card_left: "0%",
     card_right: "0%",
@@ -24,8 +24,8 @@ const Game = () => {
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("authToken") || "");
   const unityRef = useRef(null);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [isPaymentGetOpen, setIsPaymentGetOpen] = useState(false);
   const [isPaymentSetOpen, setIsPaymentSetOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -79,7 +79,7 @@ const Game = () => {
 
       socket.on("DC", () => {
         console.log("Desconectado: Usuario ja esta na sala");
-        navigate(ROUTES.HOME, { state: { alreadyOnRoom: true } });
+        router.push(`${ROUTES.HOME}?alreadyOnRoom=true`);
       });
     };
 
@@ -106,7 +106,7 @@ const Game = () => {
   socket.on("DC", () => {
 
     console.log("Desconectado:");
-    navigate(ROUTES.HOME);
+    router.push(ROUTES.HOME);
     
   });
 
@@ -135,9 +135,9 @@ const Game = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/");
+      router.push("/");
     }
-  }, [token, navigate]);
+  }, [token, router]);
 
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -240,14 +240,13 @@ const Game = () => {
     fetchUser();
   }, [token]);
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const roomId = queryParams.get("roomId");
+    const roomId = searchParams.get("roomId");
     if (roomId) {
       setSelectedRoom(roomId);
       sendToUnity(roomId);
     }
-  }, [location.search]);
-  const sendToUnity = (roomId, role) => {
+  }, [searchParams]);
+  const sendToUnity = (roomId: any, role?: any) => {
     if (
       !isUnityReady ||
       !unityRef.current ||
@@ -436,10 +435,10 @@ const Game = () => {
                   transition: "all 0.2s",
                 }}
                 onMouseOver={(e) =>
-                  (e.target.style.backgroundColor = "#334155")
+                  ((e.target as HTMLElement).style.backgroundColor = "#334155")
                 }
                 onMouseOut={(e) =>
-                  (e.target.style.backgroundColor = "transparent")
+                  ((e.target as HTMLElement).style.backgroundColor = "transparent")
                 }
                 aria-label="Fechar chat"
               >

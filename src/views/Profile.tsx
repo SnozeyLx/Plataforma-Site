@@ -1,43 +1,43 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Vetor from "../assets/img/Vector.png";
-import Icon_folha from "../assets/img/Icon_folha.png";
-import Botao_avatar from "../assets/img/avatar.png";
-import Chevron from "../assets/img/chevron.png";
-import Aba from "../assets/img/caneta_avatar.png";
-import Avatar from "../assets/img/avatar.png";
-import Copia from "../assets/img/copia.png";
+const Vetor = "/assets/img/Vector.png";
+const Icon_folha = "/assets/img/Icon_folha.png";
+const Botao_avatar = "/assets/img/avatar.png";
+const Chevron = "/assets/img/chevron.png";
+const Aba = "/assets/img/caneta_avatar.png";
+const Avatar = "/assets/img/avatar.png";
+const Copia = "/assets/img/copia.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavInfo from "../assets/components/NavInfo";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ROUTES, API_URLS } from "../routes";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import InputMask from "react-input-mask";
 import "animate.css";
-import Avatar1 from "../assets/img/avatar/avatar1.png";
-import Avatar2 from "../assets/img/avatar/avatar2.png";
-import Avatar3 from "../assets/img/avatar/avatar3.png";
-import Avatar4 from "../assets/img/avatar/avatar4.png";
-import Avatar5 from "../assets/img/avatar/avatar5.png";
-import Avatar6 from "../assets/img/avatar/avatar6.png";
-import Avatar7 from "../assets/img/avatar/avatar7.png";
-import Avatar8 from "../assets/img/avatar/avatar8.png";
-import Avatar9 from "../assets/img/avatar/avatar9.png";
-import Avatar10 from "../assets/img/avatar/avatar10.png";
-import Avatar11 from "../assets/img/avatar/avatar11.png";
-import Avatar12 from "../assets/img/avatar/avatar12.png";
-import Avatar13 from "../assets/img/avatar/avatar13.png";
-import Avatar14 from "../assets/img/avatar/avatar14.png";
-import Avatar15 from "../assets/img/avatar/avatar15.png";
-import Avatar16 from "../assets/img/avatar/avatar16.png";
-import Avatar17 from "../assets/img/avatar/avatar17.png";
-import Avatar18 from "../assets/img/avatar/avatar18.png";
-import Avatar19 from "../assets/img/avatar/avatar19.png";
-import Avatar20 from "../assets/img/avatar/avatar20.png";
-import Avatar21 from "../assets/img/avatar/avatar21.png";
-import Avatar22 from "../assets/img/avatar/avatar22.png";
-import Avatar23 from "../assets/img/avatar/avatar23.png";
-import Avatar24 from "../assets/img/avatar/avatar24.png";
+const Avatar1 = "/assets/img/avatar/avatar1.png";
+const Avatar2 = "/assets/img/avatar/avatar2.png";
+const Avatar3 = "/assets/img/avatar/avatar3.png";
+const Avatar4 = "/assets/img/avatar/avatar4.png";
+const Avatar5 = "/assets/img/avatar/avatar5.png";
+const Avatar6 = "/assets/img/avatar/avatar6.png";
+const Avatar7 = "/assets/img/avatar/avatar7.png";
+const Avatar8 = "/assets/img/avatar/avatar8.png";
+const Avatar9 = "/assets/img/avatar/avatar9.png";
+const Avatar10 = "/assets/img/avatar/avatar10.png";
+const Avatar11 = "/assets/img/avatar/avatar11.png";
+const Avatar12 = "/assets/img/avatar/avatar12.png";
+const Avatar13 = "/assets/img/avatar/avatar13.png";
+const Avatar14 = "/assets/img/avatar/avatar14.png";
+const Avatar15 = "/assets/img/avatar/avatar15.png";
+const Avatar16 = "/assets/img/avatar/avatar16.png";
+const Avatar17 = "/assets/img/avatar/avatar17.png";
+const Avatar18 = "/assets/img/avatar/avatar18.png";
+const Avatar19 = "/assets/img/avatar/avatar19.png";
+const Avatar20 = "/assets/img/avatar/avatar20.png";
+const Avatar21 = "/assets/img/avatar/avatar21.png";
+const Avatar22 = "/assets/img/avatar/avatar22.png";
+const Avatar23 = "/assets/img/avatar/avatar23.png";
+const Avatar24 = "/assets/img/avatar/avatar24.png";
 const calcVipLevelProgress = (totalPoints) => {
   const points = Math.max(0, Number(totalPoints || 0));
   let level = 0;
@@ -53,7 +53,7 @@ const calcVipLevelProgress = (totalPoints) => {
   };
 };
 const Profile = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [showPasswordAtual, setShowPasswordAtual] = useState(false);
   const [showPasswordNova, setShowPasswordNova] = useState(false);
   const [showPasswordConfirme, setShowPasswordConfirme] = useState(false);
@@ -63,7 +63,7 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [birthDay, setBirthDay] = useState("");
   const [birthMonth, setBirthMonth] = useState("");
-  const [birthYear, setBirthYear] = useState("");
+  const [birthYear, setBirthYear] = useState<any>("");
   const [cpf, setCpf] = useState("");
   const [phone, setPhone] = useState("");
   const [showCopiedModal, setShowCopiedModal] = useState(false);
@@ -77,7 +77,7 @@ const Profile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [userGames, setUserGames] = useState([]);
+  const [userGames, setUserGames] = useState<any[]>([]);
   const [loadingGames, setLoadingGames] = useState(false);
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -135,7 +135,7 @@ const Profile = () => {
       console.error("Erro ao buscar perfil:", error);
       if (error.response?.status === 401) {
         localStorage.removeItem("authToken");
-        navigate(ROUTES.LOGIN);
+        router.push(ROUTES.LOGIN);
       }
     }
   };
@@ -152,7 +152,7 @@ const Profile = () => {
       console.error("Erro ao buscar pontos (VIP/points):", error);
       if (error.response?.status === 401) {
         localStorage.removeItem("authToken");
-        navigate(ROUTES.LOGIN);
+        router.push(ROUTES.LOGIN);
       }
       setUserPoint(0);
     }
@@ -214,7 +214,7 @@ const Profile = () => {
       console.error("Erro ao atualizar perfil:", error);
       if (error.response?.status === 401) {
         localStorage.removeItem("authToken");
-        navigate("/");
+        router.push("/");
       }
     }
   };
@@ -222,7 +222,7 @@ const Profile = () => {
     if (Number.isInteger(selectedAvatar) && selectedAvatar >= 1 && selectedAvatar <= avatares.length) {
       return avatares[selectedAvatar - 1];
     }
-    if (imgProfile && imgProfile.trim() !== "" && !isNaN(imgProfile)) {
+    if (imgProfile && imgProfile.trim() !== "" && !isNaN(Number(imgProfile))) {
       const n = Number(imgProfile);
       if (Number.isFinite(n) && n >= 1 && n <= avatares.length) {
         return avatares[n - 1];
@@ -247,7 +247,7 @@ const Profile = () => {
       console.error("Erro ao atualizar senha:", error);
     }
   };
-  const fetchUserGames = async (page = 1) => {
+  const fetchUserGames = async (page: any = 1) => {
     setLoadingGames(true);
     try {
       const response = await api.get(`/users/games?page=${page}`);
@@ -273,7 +273,7 @@ const Profile = () => {
       setUserGames([]);
       if (error.response?.status === 401) {
         localStorage.removeItem("authToken");
-        navigate(ROUTES.LOGIN);
+        router.push(ROUTES.LOGIN);
       }
     } finally {
       setLoadingGames(false);
@@ -603,7 +603,7 @@ const Profile = () => {
               <p
                 className="text-white fs-5 m-0 d-flex align-items-center"
                 style={{ cursor: "pointer", height: "40px" }}
-                onClick={() => navigate(ROUTES.HOME)}
+                onClick={() => router.push(ROUTES.HOME)}
               >
                 <img src={Vetor} alt="Voltar" className="me-2 poppins-regular" /> Perfil
               </p>
@@ -817,7 +817,7 @@ const Profile = () => {
                               className="form-control poppins-regular border-0 pe-5"
                               style={{ backgroundColor: "#0F1923", color: "#fff" }}
                               placeholder="Dia"
-                              maxLength="2"
+                              maxLength={2}
                               value={birthDay}
                               onChange={(e) => setBirthDay(e.target.value)}
                               onClick={() => setShowCalendarModal(true)}
@@ -836,7 +836,7 @@ const Profile = () => {
                             className="form-control poppins-regular border-0 pe-5"
                             style={{ backgroundColor: "#0F1923", color: "#fff" }}
                             placeholder="Mês"
-                            maxLength="2"
+                            maxLength={2}
                             value={birthMonth}
                             onChange={(e) => setBirthMonth(e.target.value)}
                             onClick={() => setShowCalendarModal(true)}
@@ -903,7 +903,7 @@ const Profile = () => {
                     <div className="d-flex justify-content-between">
                       <button
                         className="btn  text-white w-50 me-2"
-                        onClick={() => navigate(ROUTES.HOME)}
+                        onClick={() => router.push(ROUTES.HOME)}
                         style={{ backgroundColor: "#FFFFFF1A", height: "48px" }}
                       >
                         Retornar
@@ -986,7 +986,7 @@ const Profile = () => {
                     <div className="d-flex justify-content-between">
                       <button
                         className="btn  text-white w-50 me-2"
-                        onClick={() => navigate(ROUTES.HOME)}
+                        onClick={() => router.push(ROUTES.HOME)}
                         style={{ backgroundColor: "#FFFFFF1A", height: "48px" }}
                       >
                         Retornar
@@ -1147,7 +1147,7 @@ const Profile = () => {
                             </span>
                           )}
                         </div>
-                        <button className="btn bg-secondary text-white w-100 w-md-auto" onClick={() => navigate(ROUTES.HOME)}>
+                        <button className="btn bg-secondary text-white w-100 w-md-auto" onClick={() => router.push(ROUTES.HOME)}>
                           Retornar
                         </button>
                       </div>

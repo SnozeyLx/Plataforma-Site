@@ -1,32 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import IconChat from '../img/IconChat.png';
-import Avatar1 from "../img/avatar/avatar1.png";
-import Avatar2 from "../img/avatar/avatar2.png";
-import Avatar3 from "../img/avatar/avatar3.png";
-import Avatar4 from "../img/avatar/avatar4.png";
-import Avatar5 from "../img/avatar/avatar5.png";
-import Avatar6 from "../img/avatar/avatar6.png";
-import Avatar7 from "../img/avatar/avatar7.png";
-import Avatar8 from "../img/avatar/avatar8.png";
-import Avatar9 from "../img/avatar/avatar9.png";
-import Avatar10 from "../img/avatar/avatar10.png";
-import Avatar11 from "../img/avatar/avatar11.png";
-import Avatar12 from "../img/avatar/avatar12.png";
-import Avatar13 from "../img/avatar/avatar13.png";
-import Avatar14 from "../img/avatar/avatar14.png";
-import Avatar15 from "../img/avatar/avatar15.png";
-import Avatar16 from "../img/avatar/avatar16.png";
-import Avatar17 from "../img/avatar/avatar17.png";
-import Avatar18 from "../img/avatar/avatar18.png";
-import Avatar19 from "../img/avatar/avatar19.png";
-import Avatar20 from "../img/avatar/avatar20.png";
-import Avatar21 from "../img/avatar/avatar21.png";
-import Avatar22 from "../img/avatar/avatar22.png";
-import Avatar23 from "../img/avatar/avatar23.png";
-import Avatar24 from "../img/avatar/avatar24.png";
-const ChatOnline = ({ token }) => {
-  const [messages, setMessages] = useState([]);
+const IconChat = "/assets/img/IconChat.png";
+const Avatar1 = "/assets/img/avatar/avatar1.png";
+const Avatar2 = "/assets/img/avatar/avatar2.png";
+const Avatar3 = "/assets/img/avatar/avatar3.png";
+const Avatar4 = "/assets/img/avatar/avatar4.png";
+const Avatar5 = "/assets/img/avatar/avatar5.png";
+const Avatar6 = "/assets/img/avatar/avatar6.png";
+const Avatar7 = "/assets/img/avatar/avatar7.png";
+const Avatar8 = "/assets/img/avatar/avatar8.png";
+const Avatar9 = "/assets/img/avatar/avatar9.png";
+const Avatar10 = "/assets/img/avatar/avatar10.png";
+const Avatar11 = "/assets/img/avatar/avatar11.png";
+const Avatar12 = "/assets/img/avatar/avatar12.png";
+const Avatar13 = "/assets/img/avatar/avatar13.png";
+const Avatar14 = "/assets/img/avatar/avatar14.png";
+const Avatar15 = "/assets/img/avatar/avatar15.png";
+const Avatar16 = "/assets/img/avatar/avatar16.png";
+const Avatar17 = "/assets/img/avatar/avatar17.png";
+const Avatar18 = "/assets/img/avatar/avatar18.png";
+const Avatar19 = "/assets/img/avatar/avatar19.png";
+const Avatar20 = "/assets/img/avatar/avatar20.png";
+const Avatar21 = "/assets/img/avatar/avatar21.png";
+const Avatar22 = "/assets/img/avatar/avatar22.png";
+const Avatar23 = "/assets/img/avatar/avatar23.png";
+const Avatar24 = "/assets/img/avatar/avatar24.png";
+const ChatOnline = ({ token }: any) => {
+  const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [connectionStatus, setConnectionStatus] = useState('Conectando...');
   const [username, setUsername] = useState(localStorage.getItem('userName'));
@@ -264,7 +264,7 @@ const ChatOnline = ({ token }) => {
                         width: "40px",
                       }}
                       onError={(e) => {
-                        e.target.src = avatares[0];
+                        (e.target as HTMLImageElement).src = avatares[0];
                       }}
                     />
                     <div

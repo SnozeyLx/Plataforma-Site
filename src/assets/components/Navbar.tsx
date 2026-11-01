@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from '../img/logo.jpg';
-import logoMobile from '../img/logoMobile.jpg';
+const logo = "/assets/img/logo.jpg";
+const logoMobile = "/assets/img/logoMobile.jpg";
 import 'animate.css';
 
-const Navbar = ({ onLoginClick, onRegisterClick }) => {
+const Navbar = ({ onLoginClick, onRegisterClick }: any) => {
   return (
     <nav style={{ backgroundColor:"#0F1923" }} className="navbar navbar-expand-lg animate__animated animate__fadeInDown">
       <div className="container-fluid">

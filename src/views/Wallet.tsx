@@ -1,34 +1,34 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ROUTES, API_URLS } from "../routes";
-import Vetor from "../assets/img/Vector.png";
-import Success from "../assets/img/sucesso.png";
-import Error from "../assets/img/erro.png";
-import PayPix from "../assets/img/process_WhitDraw.png";
+const Vetor = "/assets/img/Vector.png";
+const Success = "/assets/img/sucesso.png";
+const Error = "/assets/img/erro.png";
+const PayPix = "/assets/img/process_WhitDraw.png";
 import NavInfo from "../assets/components/NavInfo";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import Copia from "../assets/img/copia.png";
+const Copia = "/assets/img/copia.png";
 import "animate.css";
 const Wallet = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const inputRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
   const [showPixModal, setShowPixModal] = useState(false);
   const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
   const [pixType, setPixType] = useState("CPF");
-  const [userPixData, setUserPixData] = useState(null);
+  const [userPixData, setUserPixData] = useState<any>(null);
   const [userBalance, setUserBalance] = useState(0);
   const [isLoadingPix, setIsLoadingPix] = useState(false);
   const [withdrawalAmount, setWithdrawalAmount] = useState("");
-  const [withdrawalStatus, setWithdrawalStatus] = useState(null);
-  const [withdrawalError, setWithdrawalError] = useState(null);
+  const [withdrawalStatus, setWithdrawalStatus] = useState<any>(null);
+  const [withdrawalError, setWithdrawalError] = useState<any>(null);
   const [isProcessingWithdrawal, setIsProcessingWithdrawal] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
   const [showTransactionModal, setShowTransactionModal] = useState(false);
   const [showCopiedModal, setShowCopiedModal] = useState(false);
-  const [recentWithdrawals, setRecentWithdrawals] = useState([]);
-  const [transactions, setTransactions] = useState([]);
+  const [recentWithdrawals, setRecentWithdrawals] = useState<any[]>([]);
+  const [transactions, setTransactions] = useState<any[]>([]);
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -41,7 +41,7 @@ const Wallet = () => {
   const [activeTab, setActiveTab] = useState("deposito");
   const [selectedMethod, setSelectedMethod] = useState("PIX");
   const [selectedAmount, setSelectedAmount] = useState(50);
-  const [customAmount, setCustomAmount] = useState(false);
+  const [customAmount, setCustomAmount] = useState<any>(false);
   const [isDepositing, setIsDepositing] = useState(false);
   const depositAmounts = [50, 100, 500, 1000, 3000, 5000, 10000, 50000];
   const api = axios.create({
@@ -72,7 +72,7 @@ const Wallet = () => {
     const getStatusBadge = (status) => {
     const statusLower = status.toLowerCase();
     if (
-      statusLower.includes("paid" || "completed")
+      statusLower.includes("paid")
     ) {
       return <span className="text-success">Concluído</span>;
     } else if (statusLower.includes("processing")) {
@@ -132,7 +132,7 @@ const Wallet = () => {
       console.error("Erro ao carregar dados PIX:", error);
       if (error.response?.status === 401) {
         localStorage.removeItem("token");
-        navigate("/");
+        router.push("/");
       }
     } finally {
       setIsLoadingPix(false);
@@ -164,7 +164,7 @@ const handleDeposito = () => {
   const value = customAmount || selectedAmount;
   if (Number(value) < 10 || isDepositing) return;
   setIsDepositing(true);
-  navigate("/deposito", { state: { value: Number(value) } });
+  router.push(`/deposito?value=${Number(value)}`);
 };
   const handlePixInputChange = (e) => {
     const { name, value } = e.target;
@@ -210,7 +210,7 @@ const handleDeposito = () => {
   };
 
   const handleWithdrawal = async () => {
-    if (!withdrawalAmount || isNaN(withdrawalAmount)) {
+    if (!withdrawalAmount || isNaN(Number(withdrawalAmount))) {
       setWithdrawalError("Valor inválido");
       return;
     }
@@ -485,7 +485,7 @@ const handleDeposito = () => {
       {showWithdrawalModal && withdrawalStatus && (
         <>
           <div
-            onClick={() => navigate(ROUTES.HOME)}
+            onClick={() => router.push(ROUTES.HOME)}
             style={{
               position: 'fixed',
               inset: 0,
@@ -538,7 +538,7 @@ const handleDeposito = () => {
                   type="button"
                   className="btn-close"
                   aria-label="Fechar"
-                  onClick={() => navigate(ROUTES.HOME)}
+                  onClick={() => router.push(ROUTES.HOME)}
                   style={{ flexShrink: 0 }}
                 />
               </div>
@@ -569,7 +569,7 @@ const handleDeposito = () => {
                   <p
                     className="text-white fs-5 m-0 d-flex align-items-center"
                     style={{ cursor: "pointer" }}
-                    onClick={() => navigate(ROUTES.HOME)}
+                    onClick={() => router.push(ROUTES.HOME)}
                   >
                     <img src={Vetor} alt="Voltar" className="poppins-semibold me-2" />
                     Carteira
@@ -900,7 +900,7 @@ const handleDeposito = () => {
                                   ))
                                 ) : (
                                   <tr>
-                                    <td colSpan="4" className="text-center py-4">
+                                    <td colSpan={4} className="text-center py-4">
                                       Nenhuma transação encontrada
                                     </td>
                                   </tr>

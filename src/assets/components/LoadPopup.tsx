@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import logo from "../img/logo.jpg";
-const LoadPopup = ({ onClose }) => {
+const logo = "/assets/img/logo.jpg";
+const LoadPopup = ({ onClose }: any) => {
   const [isVisible, setIsVisible] = useState(true);
   useEffect(() => {
     const ageConfirmed = localStorage.getItem("ageConfirmed");

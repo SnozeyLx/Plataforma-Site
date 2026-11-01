@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ROUTES, API_URLS } from "../../routes";
 import axios from "axios";
-import logo from "../img/logo.jpg";
-import spinner from "../img/hugeicons_loading-03.png";
+const logo = "/assets/img/logo.jpg";
+const spinner = "/assets/img/hugeicons_loading-03.png";
 import ModalForgout from "../components/ModalForgout";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 import "animate.css";
-const Login = ({ onClose, onOpenRegister }) => {
+const Login = ({ onClose, onOpenRegister }: any) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ const Login = ({ onClose, onOpenRegister }) => {
   const [loading, setLoading] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleOpenRegister = () => {
     onClose?.();
@@ -31,7 +31,7 @@ const Login = ({ onClose, onOpenRegister }) => {
       localStorage.setItem("authToken", token);
 
       onClose?.();
-      navigate(ROUTES.HOME);
+      router.push(ROUTES.HOME);
     } catch (err) {
       if (!err.response) {
         setError("Sem conexão com o servidor. Tente novamente.");

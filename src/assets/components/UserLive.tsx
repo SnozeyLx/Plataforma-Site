@@ -1,23 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import Vetor from "../img/Vector.png";
-import { useNavigate } from "react-router-dom";
+const Vetor = "/assets/img/Vector.png";
+import { useRouter } from "next/navigation";
 import { API_URLS } from "../../routes";
 import "react-circular-progressbar/dist/styles.css";
-const UserLive = ({ onOpenChat }) => {
-  const navigate = useNavigate();
+const UserLive = ({ onOpenChat }: any) => {
+  const router = useRouter();
   // const videoRef = useRef(null);
   // const ws = useRef(null);
   // const peerConnectionRef = useRef(null);
   // const [viewerCount, setViewerCount] = useState(0);
   // const [currentTime, setCurrentTime] = useState("");
   // const [connectionStatus, setConnectionStatus] = useState("connecting");
-  // const [error, setError] = useState(null);
-  // const [isWinner, setIsWinner] = useState(null);
-  // const [value, setValue] = useState(null);
+  // const [error, setError] = useState<any>(null);
+  // const [isWinner, setIsWinner] = useState<any>(null);
+  // const [value, setValue] = useState<any>(null);
   // const pendingCandidates = useRef([]);
   // const remoteDescriptionSet = useRef(false);
-  const [bets, setBets] = useState([]);
+  const [bets, setBets] = useState<any[]>([]);
   const [token] = useState(localStorage.getItem("authToken") || "");
   const [UserId] = useState(localStorage.getItem("UserId") || "");
   const [roomId] = useState(localStorage.getItem("roomId") || "");
@@ -75,12 +75,12 @@ const UserLive = ({ onOpenChat }) => {
   //     const diff = now - lastActivityAtRef.current;
 
   //     if (diff >= TEN_MINUTES) {
-  //       navigate("/home");
+  //       router.push("/home");
   //     }
   //   };
   //   const intervalId = setInterval(checkInactivity, TEN_MINUTES);
   //   return () => clearInterval(intervalId);
-  // }, [UserId, navigate]);
+  // }, [UserId, router]);
 
 
   const src = `https://ronda-2ha8xj.greenstudios.com.br/

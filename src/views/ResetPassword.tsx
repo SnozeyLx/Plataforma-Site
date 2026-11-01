@@ -1,16 +1,16 @@
 import React, { useMemo, useState } from "react";
 import axios from "axios";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import { API_URLS } from "../routes";
-import Logo from "../assets/img/logo.jpg";
-import spinner from '../assets/img/hugeicons_loading-03.png';
+const Logo = "/assets/img/logo.jpg";
+const spinner = "/assets/img/hugeicons_loading-03.png";
 import "animate.css";
 import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 
 
 const ResetPassword = () => {
-  const [params] = useSearchParams();
-  const navigate = useNavigate();
+  const params = useSearchParams();
+  const router = useRouter();
 
   const token = useMemo(() => params.get("token") || "", [params]);
   const email = useMemo(() => params.get("email") || "", [params]);
@@ -63,7 +63,7 @@ const ResetPassword = () => {
 
       if (data?.success) {
         setSuccess("Senha redefinida com sucesso! Redirecionando para o login...");
-        setTimeout(() => navigate("/"), 2000);
+        setTimeout(() => router.push("/"), 2000);
       } else {
         setError(data?.message || "Não foi possível redefinir a senha.");
       }

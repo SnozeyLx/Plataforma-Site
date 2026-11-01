@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { ROUTES } from "../routes";
-import Vetor from "../assets/img/Vector.png";
+const Vetor = "/assets/img/Vector.png";
 import NavInfo from "../assets/components/NavInfo";
 import "bootstrap/dist/css/bootstrap.min.css";
-import call from "../assets/img/callCenter.png";
+const call = "/assets/img/callCenter.png";
 import "animate.css";
 const Suport = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const inputRef = useRef(null);
   const [activeTab, setActiveTab] = useState("whatsapp");
   const [emailSubject, setEmailSubject] = useState("");
@@ -85,7 +85,7 @@ const Suport = () => {
             <p
               className="text-white fs-5 m-0 d-flex align-items-center"
               style={{ cursor: "pointer" }}
-              onClick={() => navigate(ROUTES.HOME)}
+              onClick={() => router.push(ROUTES.HOME)}
             >
               <img
                 style={{ fontSize: "20px" }}
